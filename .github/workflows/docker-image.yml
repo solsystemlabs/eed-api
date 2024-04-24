@@ -21,7 +21,7 @@ jobs:
           # Path to the Dockerfile (defaults to Dockerfile)
           # dockerfile: # optional, default is Dockerfile
           # (Optional) Name of the image to build
-          image-name-overwrite: eed-api:$(date +%s)
+          image-name-overwrite: eed-api
           
   deploy:
     needs: build
