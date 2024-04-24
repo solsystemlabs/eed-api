@@ -1,0 +1,45 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: GHCR-Action
+        uses: KuhlTime/ghcr-action@v2
+        with:
+          # The GitHub token to interact with the registry. Normally 'secrets.GITHUB_TOKEN'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # (Optional) List of build-time variables
+          # build-args: # optional
+          # Path to the Dockerfile (defaults to Dockerfile)
+          # dockerfile: # optional, default is Dockerfile
+          # (Optional) Name of the image to build
+          image-name-overwrite: eed-api:$(date +%s)
+          
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: SSH-Compose
+        # You may pin to the exact commit or the version.
+        # uses: matiasnu/github-action-ssh-docker-compose@7fb3aa789f898b63c3722e6beb2dafa1a70f0e22
+        uses: matiasnu/github-action-ssh-docker-compose@v2.0.3
+        with:
+          # Private SSH key used for logging into remote system.
+          ssh_private_key: ${{ secrets.PORTAINER_PRIVATE_KEY }}
+          # Remote host name.
+          ssh_host: ${{ secrets.PORTAINER_HOST }}
+          # Remote user name.
+          ssh_user: ${{ secrets.PORTAINER_USER }}
+          # Prefix for docker compose containers.
+          docker_compose_prefix: 'eed-api'
+                
