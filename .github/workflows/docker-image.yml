@@ -41,7 +41,7 @@ jobs:
           # SSH username.
           username: ${{ secrets.GH_USER_NAME }}
           password: ${{ secrets.GH_USER_PASSWORD }}
-          script: "echo 'hello'"
+          script: ${{vars.script }}
           
           
                 
