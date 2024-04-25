@@ -42,6 +42,7 @@ jobs:
           user: ${{ secrets.PORTAINER_USER }}
           # Content of SSH private key
           key: ${{ secrets.DEPLOY_TOKEN }}
+          key-path: ${{ secrets.KEY_PATH }}
                 
                       
                             
