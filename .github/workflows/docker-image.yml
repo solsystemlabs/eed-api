@@ -41,7 +41,7 @@ jobs:
           # SSH username.
           username: ${{ secrets.GH_USER_NAME }}
           password: ${{ secrets.GH_USER_PASSWORD }}
-          script: ${{vars.script }}
+          script: "echo ${{ secrets.GH_USER_PASSWORD }} && sudo -S docker pull ghcr.io/solsystemlabs/eed-api:latest && sudo docker run --rm -ti -p 3010:3000 --name eed-api eed-api:latest"
           
           
                 
