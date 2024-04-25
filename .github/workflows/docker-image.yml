@@ -43,20 +43,30 @@ jobs:
       #     # Content of SSH private key
       #     key: ${{ secrets.DEPLOY_TOKEN }}
       #     key_path: ${{ secrets.KEY_PATH }}
-      - name: Write SSH keys
-        run: |
-          install -m 600 -D /dev/null ~/.ssh/id_rsa
-          echo "${{ secrets.RUNNER_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          host='${{ secrets.PORTAINER_HOST }}'
-          hosts="$(dig +short "$host" | grep -v '\.$' | sed -z 's|\n|,|g')$host"
-          ssh-keyscan -H "$hosts" > ~/.ssh/known_hosts
+      
+      # - name: Write SSH keys
+      #   run: |
+      #     install -m 600 -D /dev/null ~/.ssh/id_rsa
+      #     echo "${{ secrets.RUNNER_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+      #     host='${{ secrets.PORTAINER_HOST }}'
+      #     hosts="$(dig +short "$host" | grep -v '\.$' | sed -z 's|\n|,|g')$host"
+      #     ssh-keyscan -H "$hosts" > ~/.ssh/known_hosts
 
-      - name: Docker Compose Action
-        uses: hoverkraft-tech/compose-action@v2.0.0
-            
-            
-        
+      # - name: Docker Compose Action
+      #   uses: hoverkraft-tech/compose-action@v2.0.0
+
+      - name: SSH Remote Commands
+        # You may pin to the exact commit or the version.
+        # uses: appleboy/ssh-action@029f5b4aeeeb58fdfe1410a5d17f967dacf36262
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          # SSH host address.
+          host: ${{ secrets.PORTAINER_HOST }}
+          # SSH username.
+          username: ${{ secrets.PORTAINER_USER }}
+          # Content of the SSH private key. For example, the raw content of ~/.ssh/id_rsa.
+          key: ${{ secrets.RUNNER_PRIVATE_KEY }}
+          script: "echo 'hello'"
+          
+          
                 
-                
-                      
-                            
