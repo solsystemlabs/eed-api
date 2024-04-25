@@ -31,18 +31,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Docker over SSH
+      - name: ssh-docker-compose
         # You may pin to the exact commit or the version.
-        # uses: pcjun97/action-setup-docker-host-ssh@66b37629da941d78f37d8ede50ea50b841b8e8be
-        uses: pcjun97/action-setup-docker-host-ssh@v1
+        # uses: djnotes/github-action-ssh-docker-compose@d2e13949c92cb86a69ea36e83ebaa01d6d01de9c
+        uses: djnotes/github-action-ssh-docker-compose@v2.0.1
         with:
-          # Remote Docker host
-          host: ${{ secrets.PORTAINER_HOST }}
-          # SSH user
-          user: ${{ secrets.PORTAINER_USER }}
-          # Content of SSH private key
-          key: ${{ secrets.DEPLOY_TOKEN }}
-          key_path: ${{ secrets.KEY_PATH }}
+          # Private SSH key used for logging into remote system.
+          ssh_private_key: ${{ secrets.RUNNER_PRIVATE_KEY }}
+          # Remote host name.
+          ssh_host: ${{ secrets.PORTAINER_HOST }}
+          # Remote SSH port.
+          ssh_port: 22
+          # Remote user name.
+          ssh_user: ${{ secrets.PORTAINER_USER }}
+          # Prefix for docker-compose containers.
+          docker_compose_prefix: eed-api
+                
                 
                       
                             
