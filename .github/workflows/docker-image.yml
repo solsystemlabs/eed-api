@@ -27,7 +27,7 @@ jobs:
           id: meta
           uses: docker/metadata-action@v4
           with:
-            images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            images: ghcr.io/${{gihub.repository_owner}}/eed-api
             tags: |
               type=ref,event=branch
 
