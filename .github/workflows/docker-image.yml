@@ -35,13 +35,19 @@ jobs:
         # You may pin to the exact commit or the version.
         # uses: appleboy/ssh-action@029f5b4aeeeb58fdfe1410a5d17f967dacf36262
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          GH_USER_PASSWORD: ${{ secrets.GH_USER_PASSWORD }}
         with:
           # SSH host address.
           host: ${{ secrets.PORTAINER_HOST }}
           # SSH username.
           username: ${{ secrets.GH_USER_NAME }}
           password: ${{ secrets.GH_USER_PASSWORD }}
-          script: echo ${{ secrets.GH_USER_PASSWORD }} && sudo -S docker pull ghcr.io/solsystemlabs/eed-api:latest && sudo docker run --rm -ti -p 3010:3000 --name eed-api eed-api:latest
+          envs: GH_USER_PASSWORD
+          script:  |
+            echo "$GH_USER_PASSWORD"
+            sudo -S docker pull ghcr.io/solsystemlabs/eed-api:latest 
+            sudo docker run --rm -ti -p 3010:3000 --name eed-api eed-api:latest
           
           
                 
