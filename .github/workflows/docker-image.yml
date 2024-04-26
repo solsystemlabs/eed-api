@@ -32,9 +32,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.1.2
       - name: Docker-Compose Remote Deployment
-        uses: alex-ac/github-action-ssh-docker-compose@master
+        uses: astappiev/docker-compose-remote-action@master
         with:
-          ssh_host: ${{ secrets.PORTAINER_HOST }}
-          ssh_private_key: ${{ secrets.RUNNER_PRIVATE_KEY }}
+          ssh_host: ${{ secrets.PORTAINER_HOST }} 
           ssh_user: ${{ secrets.GH_USER_NAME }}
+          ssh_private_key: ${{ secrets.RUNNER_PRIVATE_KEY }}
+          ssh_host_public_key: ${{ secrets.RUNNER_PUBLIC_KEY }}
           docker_compose_prefix: eed-api
