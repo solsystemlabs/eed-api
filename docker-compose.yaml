@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: base
+      target: production
     volumes:
       - ./src:/home/node/app/src
     container_name: eed-api
