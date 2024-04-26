@@ -8,7 +8,6 @@ services:
       target: production
     volumes:
       - ./src:/home/node/app/src
-    container_name: eed-api
     expose:
       - '4000'
     ports:
