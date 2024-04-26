@@ -31,22 +31,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.2
-      - name: SSH Remote Commands
-        # You may pin to the exact commit or the version.
-        # uses: appleboy/ssh-action@029f5b4aeeeb58fdfe1410a5d17f967dacf36262
-        uses: appleboy/ssh-action@v1.0.3
-        env:
-          GH_USER_PASSWORD: ${{ secrets.GH_USER_PASSWORD }}
+      - name: Docker-Compose Remote Deployment
+        uses: alex-ac/github-action-ssh-docker-compose@master
         with:
-          # SSH host address.
-          host: ${{ secrets.PORTAINER_HOST }}
-          # SSH username.
-          username: ${{ secrets.GH_USER_NAME }}
-          password: ${{ secrets.GH_USER_PASSWORD }}
-          envs: GH_USER_PASSWORD
-          script:  |
-            echo "$GH_USER_PASSWORD" && sudo -S docker pull ghcr.io/solsystemlabs/eed-api:latest 
-            echo "$GH_USER_PASSWORD" && sudo docker run --rm -ti -p 3010:3000 --name eed-api eed-api:latest
-          
-          
-                
+          ssh_host: ${{ secrets.PORTAINER_HOST }}
+          ssh_private_key: ${{ secrets.RUNNER_PRIVATE_KEY }}
+          ssh_user: ${{ secrets.GH_USER_NAME }}
+          docker_compose_prefix: eed-api
