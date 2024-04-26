@@ -2,14 +2,10 @@ version: '3.7'
 
 services:
   eed-api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: production
+    image: ghcr.io/solsystemlabs/eed-api:latest
     volumes:
       - ./src:/home/node/app/src
     expose:
       - '4000'
     ports:
       - '4000:3000'
-    command: npm run dev
