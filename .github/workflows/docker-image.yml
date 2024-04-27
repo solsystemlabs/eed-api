@@ -16,9 +16,6 @@ jobs:
           # You may pin to the exact commit or the version.
           # uses: iamsauravsharma/create-dotenv@18b2362db24ff1016179b5fefc8e38dbe77b41a5
           uses: iamsauravsharma/create-dotenv@v2.0.1
-          with:
-            # Full path for env file
-            file-path: /home/admin/app/.env
           env:
             DATABASE_URL: ${{ secrets.DATABASE_URL }}
             PORT: ${{ secrets.PORT }}
