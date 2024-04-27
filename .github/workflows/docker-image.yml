@@ -25,6 +25,8 @@ jobs:
             context: .
             push: true
             tags: ghcr.io/${{github.repository_owner}}/eed-api:latest
+            secrets: |
+              DOTENV_KEY="dotenv://:key_b130b8376b71b8b3e7025eb144f4746e68172c6785ea6b77da1f3a24cd1966e3@dotenv.org/vault/.env.vault?environment=production"
 
     deploy:
       needs: build
