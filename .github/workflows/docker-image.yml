@@ -39,3 +39,5 @@ jobs:
             ssh_user: ${{ secrets.GH_USER_NAME }}
             ssh_key: ${{ secrets.RUNNER_PRIVATE_KEY }}
             compose_file: docker-compose.yaml
+            pull: true
+            force_recreate: true
