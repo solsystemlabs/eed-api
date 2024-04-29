@@ -67,7 +67,7 @@ jobs:
           script: |
             echo '${{secrets.GHCR_PASSWORD}}' | docker login ghcr.io -u solsystemlabs --password-stdin
             cd /home/'${{secrets.GH_USER_NAME}}'/eed-api
-            docker compose up -d
+            docker compose up -d --pull "always"
           # Stop the script after the first failure.
           script_stop: true
 
