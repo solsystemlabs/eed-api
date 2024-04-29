@@ -1,8 +1,7 @@
-version: '3.7'
-
 services:
   eed-api:
-    image: ghcr.io/solsystemlabs/eed-api:latest
+    image: ghcr.io/solsystemlabs/eed-api
+    restart: always
     volumes:
       - ./src:/home/node/app/src
     expose:
@@ -10,3 +9,19 @@ services:
     ports:
       - '4000:3000'
     command: 'npm run dev'
+
+  db:
+    image: postgres
+    restart: always
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
+    expose:
+      - '32768'
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
