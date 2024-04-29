@@ -8,9 +8,13 @@ const getUsers = (async (req: Request, res: Response, next: NextFunction) => {
 });
 
 const getUserById = (async (req: Request, res: Response, next: NextFunction) => {
+  const userId = req.params.userId;
+
+  if (!userId || !Number(userId)) return res.status(400).json({message: "Please provide a userId"});
+
   const user = await prisma.user.findUnique({
     where: {
-      id: Number(req.params.userId),
+      id: Number(userId),
     }
   });
 
@@ -44,6 +48,7 @@ const updateUser = (async (req: Request, res: Response, next: NextFunction) => {
   const userId = req.params.userId;
 
   if (!data) return res.status(400).json({message: "No user data provided"});
+  if (!userId) return res.status(400).json({message: "Please provide a userId"});
 
   const updatedUser = await prisma.user.update({
     data,
@@ -55,8 +60,23 @@ const updateUser = (async (req: Request, res: Response, next: NextFunction) => {
   res.json(updatedUser);
 });
 
+const deleteUser = (async (req: Request, res: Response, next: NextFunction)=> {
+  const userId = req.params.userId;
+
+  if (!userId) return res.status(400).json({message: "Please provide a userId"});
+
+  const user = await prisma.user.delete({
+    where: {
+      id: Number(userId)
+    }
+  });
+
+  res.json(user);
+})
+
 export {
   addUser,
+  deleteUser,
   getUsers,
   getUserById,
   updateUser

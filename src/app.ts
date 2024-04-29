@@ -20,6 +20,10 @@ app.use(cookieParser());
 app.use('/api/v1/user', usersRouter);
 app.use('/api/v1', indexRouter);
 
+app.use((req: Request, res: Response) => {
+  res.send(404);
+});
+
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404));
