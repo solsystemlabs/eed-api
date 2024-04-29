@@ -57,7 +57,8 @@ jobs:
             # Ssh user
             user: ${{ secrets.GH_USER_NAME }}
             # Bash commands ran on target machine
-            command: 'echo $CR_PAT | docker login ghcr.io -u solsystemlabs --password-stdin'
+            command: |
+              echo $CR_PAT | docker login ghcr.io -u solsystemlabs --password-stdin
           
           
         - uses: chaplyk/docker-compose-remote-action@v1.1
