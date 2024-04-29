@@ -56,7 +56,7 @@ jobs:
             key: ${{ secrets.RUNNER_PRIVATE_KEY }}
             # Commands to be executed.
             script: |
-              scp '${{ github.workspace }}'/docker-compose.yaml '${{secrets.GH_USER_NAME}}'@$'{{secrets.PORTAINER_HOST}}':/home/'${{secrets.GH_USER_NAME}}'/eed-api/
+              scp '${{ github.workspace }}'/docker-compose.yaml '${{secrets.GH_USER_NAME}}'@'${{secrets.PORTAINER_HOST}}':/home/'${{secrets.GH_USER_NAME}}'/eed-api/
               echo '${{secrets.GHCR_PASSWORD}}' | docker login ghcr.io -u solsystemlabs --password-stdin
               cd /home/'${{secrets.GH_USER_NAME}}'/eed-api
               docker compose up -d --pull
