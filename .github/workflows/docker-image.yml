@@ -44,6 +44,22 @@ jobs:
       steps:
         - name: Checkout code
           uses: actions/checkout@v4.1.2
+
+        - name: ssh-job
+          # You may pin to the exact commit or the version.
+          # uses: nekiro/ssh-job@e0d177751aced5bcaf110ce4d782a681e5e12856
+          uses: nekiro/ssh-job@v1.0.5
+          with:
+            # Target machine hostname or ip
+            host: ${{ secrets.PORTAINER_HOST }}
+            # Ssh private key used to connect to target machine
+            key: ${{ secrets.RUNNER_PRIVATE_KEY }}
+            # Ssh user
+            user: ${{ secrets.GH_USER_NAME }}
+            # Bash commands ran on target machine
+            command: 'echo $CR_PAT | docker login ghcr.io -u solsystemlabs --password-stdin'
+          
+          
         - uses: chaplyk/docker-compose-remote-action@v1.1
           name: Docker Compose Remote Action
           with:
