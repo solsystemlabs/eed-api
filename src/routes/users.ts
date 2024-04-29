@@ -1,23 +1,14 @@
-import express, { Request, Response, NextFunction } from 'express';
-import prisma from '../../prisma/client';
+import express from 'express';
+import { addUser, getUserById, getUsers, updateUser } from "../controllers/users.controller";
 
 const router = express.Router();
 
-/* GET users listing. */
-router.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  const users = await prisma.user.findMany();
+router.get('/', getUsers);
 
-  res.send(users);
-});
+router.get('/:userId', getUserById);
 
-router.get('/:userId', async (req: Request, res: Response, next: NextFunction) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      id: Number(req.params.userId),
-    },
-  });
+router.post('/', addUser);
 
-  res.send(user);
-})
+router.patch('/:userId', updateUser);
 
 export default router;

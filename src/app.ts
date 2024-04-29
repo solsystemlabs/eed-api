@@ -3,8 +3,8 @@ import createError, { HttpError } from 'http-errors';
 import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import usersRouter from './src/routes/users';
-import indexRouter from './src/routes/index';
+import usersRouter from './routes/users';
+import indexRouter from './routes';
 
 dotenv.config();
 
@@ -17,8 +17,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/users', usersRouter);
-app.use('/', indexRouter);
+app.use('/api/v1/user', usersRouter);
+app.use('/api/v1', indexRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {

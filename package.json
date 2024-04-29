@@ -6,7 +6,8 @@
     "build": "tsc -p .",
     "start": "node dist/app.js",
     "dev": "nodemon src/app.ts",
-    "prisma:generate": "prisma generate"
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push"
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",

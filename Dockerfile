@@ -13,4 +13,6 @@ COPY . .
 
 RUN npm run prisma:generate
 
+RUN npm run prisma:push
+
 RUN npm run build
