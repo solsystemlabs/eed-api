@@ -49,7 +49,7 @@ jobs:
             host: ${{ secrets.PORTAINER_HOST }}
             username: ${{ secrets.GH_USER_NAME }}
             password: ${{ secrets.GH_USER_PASSWORD }}
-            source: "${{github.workspace}}/docker-compose.yaml"
+            source: "./docker-compose.yaml"
             target: /home/${{secrets.GH_USER_NAME}}/eed-api
 
         - name: SSH Remote Commands
