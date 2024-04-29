@@ -4,8 +4,10 @@ import prisma from '../../prisma/client';
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.send('respond with a resources');
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  const users = await prisma.user.findMany();
+
+  res.send(users);
 });
 
 router.get('/:userId', async (req: Request, res: Response, next: NextFunction) => {
