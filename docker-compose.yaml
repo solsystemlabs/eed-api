@@ -9,3 +9,19 @@ services:
     ports:
       - '4000:3000'
     command: 'npm run start'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.eed-api.entrypoints=http"
+      - "traefik.http.routers.eed-api.rule=Host(`eed-api.solsystemlabs.com`)"
+      - "traefik.http.middlewares.eed-api-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.eed-api.middlewares=eed-api-https-redirect"
+      - "traefik.http.routers.eed-api-secure.entrypoints=https"
+      - "traefik.http.routers.eed-api-secure.rule=Host(`eed-api.solsystemlabs.com`)"
+      - "traefik.http.routers.eed-api-secure.tls=true"
+      - "traefik.http.routers.eed-api-secure.service=eed-api"
+      - "traefik.http.services.eed-api.loadbalancer.server.port=4000"
+      - "traefik.docker.network=everybody_every_day"
+
+networks:
+  everybody_every_day:
+    external: true
