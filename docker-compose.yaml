@@ -1,5 +1,6 @@
 services:
   eed-api:
+    container_name: eed-api
     image: ghcr.io/solsystemlabs/eed-api
     restart: always
     volumes:
