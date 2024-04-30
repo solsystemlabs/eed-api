@@ -22,7 +22,7 @@ services:
       - "traefik.http.routers.eed-api-secure.rule=Host(`eed-api.solsystemlabs.com`)"
       - "traefik.http.routers.eed-api-secure.tls=true"
       - "traefik.http.routers.eed-api-secure.service=eed-api"
-      - "traefik.http.services.eed-api.loadbalancer.server.port=4000"
+      - "traefik.http.services.eed-api.loadbalancer.server.port=3000"
       - "traefik.docker.network=everybody_every_day"
 
 networks:
