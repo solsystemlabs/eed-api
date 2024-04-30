@@ -10,7 +10,7 @@ const getUsers = (async (req: Request, res: Response, next: NextFunction) => {
 const getUserById = (async (req: Request, res: Response, next: NextFunction) => {
   const userId = req.params.userId;
 
-  if (!userId || !Number(userId)) return res.status(400).json({message: "Please provide a userId"});
+  if (!userId || !Number(userId)) return res.status(400).json({message: "Please provide a userId, Rachel"});
 
   const user = await prisma.user.findUnique({
     where: {
