@@ -9,6 +9,8 @@ services:
     ports:
       - '4000:3000'
     command: 'npm run start'
+    networks:
+      - everybody_every_day
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.eed-api.entrypoints=http"
