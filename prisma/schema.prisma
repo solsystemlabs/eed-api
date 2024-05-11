@@ -27,6 +27,21 @@ model User {
   state          String?
   profile        Profile?
   prayerRequests PrayerRequest[]
+  userRoles      RolesOnUsers[]
+}
+
+model RolesOnUsers {
+  id     Int   @id @default(autoincrement())
+  role   Role  @relation(fields: [roleId], references: [id])
+  user   User? @relation(fields: [userId], references: [id])
+  roleId Int
+  userId Int?
+}
+
+model Role {
+  id       Int            @id @default(autoincrement())
+  roleName String
+  userRole RolesOnUsers[]
 }
 
 model Profile {

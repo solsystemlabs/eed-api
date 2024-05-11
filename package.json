@@ -2,12 +2,13 @@
   "name": "eed-api",
   "version": "0.0.0",
   "private": true,
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "build": "tsc -p .",
     "start": "node dist/src/app.js",
-    "dev": "nodemon src/app.ts",
-    "prisma:generate": "prisma generate",
-    "prisma:push": "prisma db push"
+    "dev": "nodemon src/app.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",

@@ -4,13 +4,13 @@ import authenticateToken from "../middlewares/authorization";
 
 const router = express.Router();
 
-router.get('/', getUsers);
+router.get('/', authenticateToken, getUsers);
 
 router.get('/:userId', getUserById);
 
 router.post('/', addUser);
 
-router.post('/signin', loginUser);
+router.post('/login', loginUser);
 
 router.patch('/:userId', updateUser);
 
